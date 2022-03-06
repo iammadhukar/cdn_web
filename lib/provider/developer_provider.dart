@@ -22,4 +22,17 @@ class DeveloperProvider extends ChangeNotifier {
       return developer.id;
     });
   }
+
+  getDevelopers() {
+    FirebaseFirestore.instance.collection('developer').get().then((snapshot) {
+      _developers = [];
+
+      if (snapshot.docs.isNotEmpty) {
+        snapshot.docs.forEach((element) {
+          _developers!.add(Developer.fromJson(element.data(), element.id));
+        });
+      }
+      notifyListeners();
+    });
+  }
 }

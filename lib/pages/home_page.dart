@@ -1,3 +1,4 @@
+import 'package:cdn_web/pages/developers_page.dart';
 import 'package:flutter/material.dart';
 
 import 'developer_form_page.dart';
@@ -31,10 +32,20 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               width: 32.0,
             ),
-            const Card(
-              child: Padding(
-                padding: EdgeInsets.all(32.0),
-                child: Text("Developers"),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DevelopersPage(),
+                  ),
+                );
+              },
+              child: const Card(
+                child: Padding(
+                  padding: EdgeInsets.all(32.0),
+                  child: Text("Developers"),
+                ),
               ),
             ),
           ],
