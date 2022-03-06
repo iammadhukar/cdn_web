@@ -196,6 +196,67 @@ class _DevelopersPageState extends State<DevelopersPage> {
                                         );
                                       },
                                     ),
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title:
+                                                const Text('Delete developer'),
+                                            content: Text(
+                                                "Do you want to delete ${developers[index].userName}"),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, false);
+                                                },
+                                                child: const Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, true);
+                                                },
+                                                child: const Text('Ok'),
+                                              ),
+                                            ],
+                                          ),
+                                        ).then((value) {
+                                          if (value ?? false) {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) => Dialog(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: const [
+                                                      CircularProgressIndicator(),
+                                                      SizedBox(
+                                                        height: 32.0,
+                                                      ),
+                                                      Text('Please wait'),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                            Provider.of<DeveloperProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .deleteDeveloper(
+                                                    developers[index])
+                                                .then((value) =>
+                                                    Navigator.pop(context));
+                                          }
+                                        });
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),

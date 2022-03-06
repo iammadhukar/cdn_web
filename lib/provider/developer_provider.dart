@@ -50,4 +50,16 @@ class DeveloperProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+  Future<String?> deleteDeveloper(Developer developer) async {
+    return await FirebaseFirestore.instance
+        .collection('developer')
+        .doc(developer.id)
+        .delete()
+        .then((value) {
+      _developers!.removeWhere((element) => element.id == developer.id);
+      notifyListeners();
+      return developer.id;
+    });
+  }
 }
