@@ -2,6 +2,7 @@ import 'package:cdn_web/control/enum.dart';
 import 'package:cdn_web/pages/home_page.dart';
 import 'package:cdn_web/pages/login_page.dart';
 import 'package:cdn_web/provider/auth_provider.dart';
+import 'package:cdn_web/provider/developer_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,6 +64,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DeveloperProvider(),
         ),
       ],
       child: MaterialApp(

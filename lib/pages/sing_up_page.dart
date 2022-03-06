@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         validator: (s) {
-                          if (s == null) {
+                          if (s?.isEmpty ?? true) {
                             return 'Name can not be empty';
                           } else {
                             return null;
@@ -63,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         validator: (s) {
-                          if (s == null) {
+                          if (s?.isEmpty ?? true) {
                             return 'Phone number can not be empty';
                           } else {
                             if (!RegExp(r"^[6-9]\d{9}$")

@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       validator: (s) {
-                        if (s == null) {
+                        if (s?.isEmpty ?? true) {
                           return 'Phone number can not be empty';
                         } else {
                           if (!RegExp(r"^[6-9]\d{9}$")
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       validator: (s) {
-                        if (s == null) {
+                        if (s?.isEmpty ?? true) {
                           return 'Otp can not be empty';
                         } else {
                           return null;
@@ -171,10 +171,10 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           icon: const Icon(Icons.arrow_back),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('ReSend'),
-                        ),
+                        // TextButton(
+                        //   onPressed: () {},
+                        //   child: const Text('ReSend'),
+                        // ),
                       ],
                     ),
                   )
