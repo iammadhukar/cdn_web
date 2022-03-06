@@ -12,4 +12,4 @@ This flutter project contains five pages:
 4. Developer form - To add a new developer
 5. Developer List - To edit or delete any existing developer
 
-To save data and to authenticate user, using firebase cloude storege.
+To save data and to authenticate user, using firebase cloud storege.
