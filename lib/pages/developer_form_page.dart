@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import '../provider/developer_provider.dart';
 
 class DeveloperFormPage extends StatefulWidget {
-  const DeveloperFormPage({Key? key}) : super(key: key);
+  final Developer? developer;
+  const DeveloperFormPage({Key? key, this.developer}) : super(key: key);
 
   @override
   State<DeveloperFormPage> createState() => _DeveloperFormPageState();
@@ -18,6 +19,25 @@ class _DeveloperFormPageState extends State<DeveloperFormPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _skillController = TextEditingController();
   final TextEditingController _hobbyeController = TextEditingController();
+  late Developer _developer;
+  bool isEdit = false;
+
+  @override
+  void initState() {
+    if (widget.developer != null) {
+      _developer = widget.developer!;
+      _userNameController.text = _developer.userName!;
+      _phoneController.text = _developer.phone.toString();
+      _emailController.text = _developer.email!;
+      _skillController.text = _developer.skillSet!;
+      _hobbyeController.text = _developer.hobby!;
+      isEdit = true;
+    } else {
+      _developer = Developer.empty();
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -180,62 +200,108 @@ class _DeveloperFormPageState extends State<DeveloperFormPage> {
                         ),
                       ),
                     );
-                    Developer _developer = Developer(
-                      null,
-                      _userNameController.text,
-                      _emailController.text,
-                      int.parse(_phoneController.text),
-                      _skillController.text,
-                      _hobbyeController.text,
-                    );
-                    Provider.of<DeveloperProvider>(context, listen: false)
-                        .saveDeveloper(_developer)
-                        .then((value) {
-                      if (value != null) {
-                        Navigator.pop(context);
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text("Success"),
-                            content: const Text("Data uploaded successfully."),
-                            actions: [
-                              TextButton(
-                                child: const Text("Ok"),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text("Error"),
-                            content: const Text(
-                                "Something went wrong. Please try again."),
-                            actions: [
-                              TextButton(
-                                child: const Text("Ok"),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                    });
+                    _developer.userName = _userNameController.text;
+                    _developer.email = _emailController.text;
+                    _developer.phone = int.parse(_phoneController.text);
+                    _developer.skillSet = _skillController.text;
+                    _developer.hobby = _hobbyeController.text;
+                    if (isEdit) {
+                      updateData();
+                    } else {
+                      saveData();
+                    }
                   }
                 },
-                child: const Text('Submit'),
+                child: Text(isEdit ? 'Update' : 'Submit'),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  saveData() {
+    Provider.of<DeveloperProvider>(context, listen: false)
+        .saveDeveloper(_developer)
+        .then((value) {
+      if (value != null) {
+        Navigator.pop(context);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Success"),
+            content: const Text("Data uploaded successfully."),
+            actions: [
+              TextButton(
+                child: const Text("Ok"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Error"),
+            content: const Text("Something went wrong. Please try again."),
+            actions: [
+              TextButton(
+                child: const Text("Ok"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      }
+    });
+  }
+
+  updateData() {
+    Provider.of<DeveloperProvider>(context, listen: false)
+        .updateDeveloper(_developer)
+        .then((value) {
+      if (value != null) {
+        Navigator.pop(context);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Success"),
+            content: const Text("Data uploaded successfully."),
+            actions: [
+              TextButton(
+                child: const Text("Ok"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Error"),
+            content: const Text("Something went wrong. Please try again."),
+            actions: [
+              TextButton(
+                child: const Text("Ok"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      }
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/developer.dart';
 import '../provider/developer_provider.dart';
+import 'developer_form_page.dart';
 
 class DevelopersPage extends StatefulWidget {
   const DevelopersPage({Key? key}) : super(key: key);
@@ -65,110 +66,138 @@ class _DevelopersPageState extends State<DevelopersPage> {
                               border: Border.all(width: 1),
                               borderRadius: const BorderRadius.all(
                                   Radius.circular(12.0))),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          child: Stack(
                             children: [
-                              Text.rich(
-                                TextSpan(
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    children: [
-                                      const TextSpan(
-                                        text: 'UserName: ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text.rich(
+                                    TextSpan(
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16.0,
                                         ),
-                                      ),
-                                      TextSpan(
-                                          text: developers[index].userName),
-                                    ]),
-                              ),
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    children: [
-                                      const TextSpan(
-                                        text: 'Email: ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                        children: [
+                                          const TextSpan(
+                                            text: 'UserName: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                              text: developers[index].userName),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16.0,
                                         ),
-                                      ),
-                                      TextSpan(text: developers[index].email),
-                                    ]),
-                              ),
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    children: [
-                                      const TextSpan(
-                                        text: 'Phone: ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Email: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                              text: developers[index].email),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16.0,
                                         ),
-                                      ),
-                                      TextSpan(
-                                          text: developers[index]
-                                              .phone
-                                              .toString()),
-                                    ]),
-                              ),
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    children: [
-                                      const TextSpan(
-                                        text: 'Skillset: ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Phone: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                              text: developers[index]
+                                                  .phone
+                                                  .toString()),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16.0,
                                         ),
-                                      ),
-                                      TextSpan(
-                                          text: developers[index].skillSet),
-                                    ]),
-                              ),
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    children: [
-                                      const TextSpan(
-                                        text: 'Hobby: ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Skillset: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                              text: developers[index].skillSet),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16.0,
                                         ),
-                                      ),
-                                      TextSpan(text: developers[index].hobby),
-                                    ]),
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Hobby: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                              text: developers[index].hobby),
+                                        ]),
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 8.0,
+                              Positioned(
+                                right: 8.0,
+                                top: 8.0,
+                                child: Column(
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.edit),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                DeveloperFormPage(
+                                              developer: developers[index],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

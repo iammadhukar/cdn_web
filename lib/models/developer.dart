@@ -30,4 +30,6 @@ class Developer {
       json['hobby'],
     );
   }
+
+  Developer.empty();
 }

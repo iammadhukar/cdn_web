@@ -23,6 +23,21 @@ class DeveloperProvider extends ChangeNotifier {
     });
   }
 
+  Future<String?> updateDeveloper(Developer developer) async {
+    return await FirebaseFirestore.instance
+        .collection('developer')
+        .doc(developer.id)
+        .set(developer.toMap())
+        .then((value) {
+      int index =
+          developers!.indexWhere((element) => element.id == developer.id);
+
+      _developers![index] = developer;
+      notifyListeners();
+      return developer.id;
+    });
+  }
+
   getDevelopers() {
     FirebaseFirestore.instance.collection('developer').get().then((snapshot) {
       _developers = [];
